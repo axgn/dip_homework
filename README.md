@@ -1,1 +1,1 @@
-# Digits Image Processing homework
+# Digital Image Processing homework
