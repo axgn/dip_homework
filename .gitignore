@@ -1,4 +1,4 @@
-*.jpg
 .vscode/
-*/*.jpg
+*.jpg
 *.code-workspace
+*.png
