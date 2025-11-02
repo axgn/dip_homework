@@ -1,0 +1,9 @@
+numpy
+opencv-python
+pillow
+scipy
+matplotlib
+
+# Notebooks (to run .ipynb in VS Code/Jupyter)
+jupyter
+ipykernel

@@ -2,3 +2,5 @@
 *.jpg
 *.code-workspace
 *.png
+data
+.venv
