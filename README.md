@@ -1,17 +1,17 @@
 # Digital Image Processing homework
 
-## dependence instruction
+## 依赖说明
 
-use
+使用
 
 ```bash
 pip install -r requirements.txt
 ```
 
-to install basic requirements
+安装基本的依赖
 
-The project use pytorch.You should install pytorch follow
+这个项目使用了pytorch，你可以在pytorch官网找到相关的下载方案。
 [pytorch official website](https://pytorch.org/).
 
-As VGG-16net, Even on my laptop with an RTX 4060, it's been running for over 20 minutes and still hasn't finished one epoch.
-So, I just show my code in this project.I ran it on cloud server environment.
+vgg16即使是在我NVIDIA RTX4060环境的笔记本上训练一个epoch的时间也已经超过了20分钟。
+所以，我仅仅只是在这个项目中展示我的代码，运行代码是在云环境中运行的。
