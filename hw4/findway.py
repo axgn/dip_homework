@@ -1,39 +1,52 @@
 import random
+from enum import Enum
 
 import numpy as np
 
 # ----- 定义环境 -----
 
 
+class Action(Enum):
+    UP = 0
+    DOWN = 1
+    LEFT = 2
+    RIGHT = 3
+
+
 class GridWorld:
-    def __init__(self):
-        self.size = 4
-        self.start = (0, 0)
-        self.goal = (3, 3)
+    def __init__(self, size=4, start=(0, 0), goal=(3, 3)):
+        self.size = size
+        self.start = start
+        self.goal = goal
         self.state = self.start
+        self.obstacles = {(1, 1), (2, 1)}
 
     def reset(self):
         self.state = self.start
         return self.state
 
-    def step(self, action):
+    def step(self, action: Action):
         x, y = self.state
-        if action == 0:  # up
-            x -= 1
-        elif action == 1:  # down
-            x += 1
-        elif action == 2:  # left
+        if action is Action.LEFT:
             y -= 1
-        elif action == 3:  # right
+        elif action is Action.RIGHT:
             y += 1
-
+        elif action is Action.UP:
+            x -= 1
+        elif action is Action.DOWN:
+            x += 1
         # 边界判断
         if x < 0 or x >= self.size or y < 0 or y >= self.size:
             reward = -0.1
             next_state = self.state
         else:
             next_state = (x, y)
-            reward = -0.01
+            # reward = -0.01
+            if next_state in self.obstacles:
+                reward = -0.5
+                next_state = self.state
+            else:
+                reward = -0.01
 
         if next_state == self.goal:
             reward = 1.0
@@ -66,7 +79,7 @@ for ep in range(episodes):
     state = env.reset()
     while True:
         action = choose_action(state)
-        next_state, reward, done = env.step(action)
+        next_state, reward, done = env.step(Action(action))
 
         x, y = state
         nx, ny = next_state
@@ -89,8 +102,8 @@ path = [state]
 
 while state != env.goal:
     x, y = state
-    action = np.argmax(q_table[x, y])  # 选最优动作
-    next_state, reward, done = env.step(action)
+    action = np.argmax(q_table[x, y])
+    next_state, reward, done = env.step(Action(action))
     path.append(next_state)
     state = next_state
 
