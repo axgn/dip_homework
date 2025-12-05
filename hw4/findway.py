@@ -3,24 +3,22 @@ from enum import Enum
 
 import numpy as np
 import pygame
+
+
 class Action(Enum):
     UP = 0
     DOWN = 1
     LEFT = 2
     RIGHT = 3
 
+
 def render_ascii_with_arrows(env, path):
     grid = [[" . " for _ in range(env.col)] for _ in range(env.row)]
 
-    for (x, y) in env.obstacles:
+    for x, y in env.obstacles:
         grid[x][y] = " # "
 
-    arrow = {
-        (1, 0):  "↓",
-        (-1, 0): "↑",
-        (0, 1):  "→",
-        (0, -1): "←"
-    }
+    arrow = {(1, 0): "↓", (-1, 0): "↑", (0, 1): "→", (0, -1): "←"}
 
     for i in range(len(path) - 1):
         x, y = path[i]
@@ -34,18 +32,20 @@ def render_ascii_with_arrows(env, path):
     grid[sx][sy] = " S "
     grid[gx][gy] = " G "
 
-    print("\nASCII GridWorld with arrows:")
+    print("\n机器人的运动路径:")
     for row in grid:
         print("".join(row))
     print()
 
+
 # ----- ASCII：只显示环境 -----
+
 
 def render_env_only(env):
     grid = [[" . " for _ in range(env.col)] for _ in range(env.row)]
 
     # 障碍
-    for (x, y) in env.obstacles:
+    for x, y in env.obstacles:
         grid[x][y] = " # "
 
     # 起点终点
@@ -54,7 +54,7 @@ def render_env_only(env):
     grid[sx][sy] = " S "
     grid[gx][gy] = " G "
 
-    print("\nASCII Environment Only:")
+    print("\n机器人当前的环境:")
     for row in grid:
         print("".join(row))
     print()
